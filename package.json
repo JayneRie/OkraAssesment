@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "q1": "node Question1_troubleshooting.js",
+    "q2a": "node Question2_consumingAPI.js",
+    "q2b": "node Question2_createlogic.js"
   },
   "author": "",
   "license": "ISC",
