@@ -11,22 +11,22 @@ async function userLogin(username, password) {
  // console.log("response", usersDetailsAtLogin.data.data.profile);
   return usersDetailsAtLogin.data.data.profile
  } catch (error) {
-     //console.log(error.response.data)  
+     console.log(error.response.data)  
  }
 }
 
-async function refreshUserWallet(walletId,variable) {
+async function refreshUserWallet(walletId,mockVariable) {
    try {
     let userDetailsAtRefresh = await axios.post('https://api.okra.ng/v2/mock-api/refresh-wallet',
         {
-        "wallet_id": walletId,
-        "variable": variable
+        "id": walletId,
+        "variable": mockVariable
     },
    )
-   //console.log("After refresh",userDetailsAtRefresh.data);
-   return userDetailsAtRefresh.data.data.profile
+  // console.log("After refresh",userDetailsAtRefresh.data.data.wallet);
+   return userDetailsAtRefresh.data.data.wallet
    } catch (error) {
-    //console.log(error.response.data) 
+    console.log(error.response.data) 
    } 
 }
 
@@ -42,13 +42,13 @@ async function userLogout() {
 
 async function start() {
     let userDetailsAtLogin = await userLogin('okra_user', 'okra_pass')
-   // let userDetailsAtRefresh = await refreshUserWallet(userDetailsAtLogin.id, 'mockVariable')
+    let userDetailsAtRefresh = await refreshUserWallet(userDetailsAtLogin.id, 'mockVariable')
     let logoutMessage = await userLogout()
     let userDetails = {
         name: userDetailsAtLogin.name,
         userId: userDetailsAtLogin.id,
         walletBefore: userDetailsAtLogin.wallet,
-     //   walletAfter: userDetailsAtRefresh.wallet,
+        walletAfter: userDetailsAtRefresh,
         messageForLogOut: logoutMessage
     }
     console.log("User Details=>", userDetails);
